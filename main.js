@@ -2,7 +2,7 @@
 // within backend files you can import any node module, however within the renderer you can only import files with a preload file
 
 const path = require("path");
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
 
 // check if application is being run in development mode
 const isDev = process.env.NODE_ENV !== "development";
@@ -31,6 +31,10 @@ function createMainWindow() {
 app.whenReady().then(() => {
   createMainWindow();
 
+  // set menu for this window as the one defined below
+  const MainMenu = Menu.buildFromTemplate(menu);
+  Menu.setApplicationMenu(MainMenu);
+
   // " activate emitted when the application is activated. Various actions can trigger this event, such as launching the application for the first time, attempting to re-launch the application when it's already running, or clicking on the application's dock or taskbar icon."
   // also for mac when there is no windows open, open another one
   app.on("activate", () => {
@@ -39,6 +43,20 @@ app.whenReady().then(() => {
     }
   });
 });
+
+// menu definition
+const menu = [
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Quit",
+        click: () => app.quit(),
+        accelerator: "CmdOrCtrl+w",
+      },
+    ],
+  },
+];
 
 // respects mac's standard where apps don't close until you cmd+q
 app.on("window-all-closed", () => {
