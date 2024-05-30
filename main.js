@@ -45,7 +45,7 @@ app.whenReady().then(() => {
 });
 
 // menu definition
-const menu = [
+const menu1 = [
   {
     label: "File",
     submenu: [
@@ -56,6 +56,27 @@ const menu = [
       },
     ],
   },
+];
+
+const menu = [
+  //respect macs standard of having app name as first menu item
+  ...(isMac ? [{ label: app.name, submenu: [{ label: "About" }] }] : []),
+  {
+    role: "fileMenu",
+  },
+  //respect windows standard of having Help menu as last menu item
+  ...(!isMac
+    ? [
+        {
+          label: "Help",
+          submenu: [
+            {
+              label: "About",
+            },
+          ],
+        },
+      ]
+    : []),
 ];
 
 // respects mac's standard where apps don't close until you cmd+q
