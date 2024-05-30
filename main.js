@@ -4,6 +4,9 @@
 const path = require("path");
 const { app, BrowserWindow } = require("electron");
 
+// check if application is being run in development mode
+const isDev = process.env.NODE_ENV !== "development";
+
 // checks if current platform is mac
 const isMac = process.platform === "darwin";
 
@@ -11,9 +14,14 @@ const isMac = process.platform === "darwin";
 function createMainWindow() {
   const mainWindow = new BrowserWindow({
     title: "Image Resizer",
-    width: 500,
+    width: isDev ? 1000 : 500,
     height: 600,
   });
+
+  // if developer mode active, open developer tools right away
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 
   // mainwindow will display this file
   mainWindow.loadFile(path.join(__dirname, "./renderer/index.html"));
