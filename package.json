@@ -1,0 +1,15 @@
+{
+  "name": "image-resizer",
+  "productName": "Image Resizer",
+  "version": "1.0.0",
+  "description": "Electron app which resizes image dimensions",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Will Pennell",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^30.0.9"
+  }
+}
