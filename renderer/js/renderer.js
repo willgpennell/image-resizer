@@ -15,6 +15,22 @@ function loadImage(e) {
     return;
   }
 
+  // image dimensions are not available in this file object so we need to create a new image object
+  const image = new Image();
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL_static
+  // https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image
+  // creates an image object from url which has width and height attributes
+  image.src = URL.createObjectURL(file);
+  console.log(file);
+  console.log(image);
+
+  // when image has finished loading set values of form fields to width and height of given image
+  image.onload = function () {
+    widthInput.value = this.width;
+    heightInput.value = this.height;
+  };
+
   console.log("success");
 
   // form is normally set to hidden, this displays the form by changing it's style to block
