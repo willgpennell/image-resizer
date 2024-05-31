@@ -6,8 +6,6 @@ const filename = document.querySelector("#filename");
 const heightInput = document.querySelector("#height");
 const widthInput = document.querySelector("#width");
 
-console.log(versions.node());
-
 function loadImage(e) {
   const file = e.target.files[0];
 
@@ -38,6 +36,7 @@ function loadImage(e) {
   // form is normally set to hidden, this displays the form by changing it's style to block
   form.style.display = "block";
   filename.innerText = file.name;
+  outputPath.innerText = path.join(os.homedir(), "imageresizer");
 }
 
 // verifies if image is of proper type.
