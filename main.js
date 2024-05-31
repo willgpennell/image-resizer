@@ -27,6 +27,19 @@ function createMainWindow() {
   mainWindow.loadFile(path.join(__dirname, "./renderer/index.html"));
 }
 
+function createAboutWindow() {
+  const aboutWindow = new BrowserWindow({
+    title: "About",
+    width: 300,
+    height: 300,
+  });
+
+  // mainwindow will display this file
+  aboutWindow.loadFile(path.join(__dirname, "./renderer/about.html"));
+}
+
+// create about window
+
 // when the window has been loaded return a promise which then calls the mainwindow function
 app.whenReady().then(() => {
   createMainWindow();
@@ -60,7 +73,14 @@ const menu1 = [
 
 const menu = [
   //respect macs standard of having app name as first menu item
-  ...(isMac ? [{ label: app.name, submenu: [{ label: "About" }] }] : []),
+  ...(isMac
+    ? [
+        {
+          label: app.name,
+          submenu: [{ label: "About", click: createAboutWindow }],
+        },
+      ]
+    : []),
   {
     role: "fileMenu",
   },
@@ -72,6 +92,7 @@ const menu = [
           submenu: [
             {
               label: "About",
+              click: createAboutWindow,
             },
           ],
         },
