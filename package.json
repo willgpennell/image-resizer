@@ -10,6 +10,8 @@
   "author": "Will Pennell",
   "license": "MIT",
   "dependencies": {
-    "electron": "^30.0.9"
+    "electron": "^30.0.9",
+    "resize-img": "^2.0.0",
+    "toastify-js": "^1.12.0"
   }
 }

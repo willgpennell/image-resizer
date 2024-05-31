@@ -11,7 +11,7 @@ function loadImage(e) {
 
   // runs isFileImage to verify file is of a proper type
   if (!isFileImage(file)) {
-    console.error("Please select an image!");
+    alertError("Please select an image!");
     return;
   }
 
@@ -36,6 +36,8 @@ function loadImage(e) {
   // form is normally set to hidden, this displays the form by changing it's style to block
   form.style.display = "block";
   filename.innerText = file.name;
+
+  // os is now available because the preload file passed it in
   outputPath.innerText = path.join(os.homedir(), "imageresizer");
 }
 
@@ -46,6 +48,32 @@ function isFileImage(file) {
   console.log(file["type"]);
   // boolean, file exists & acceptedImageTypes includes the correct type of image mime type
   return file && acceptedImageTypes.includes(file["type"]);
+}
+
+function alertError(message) {
+  Toastify.toast({
+    text: message,
+    duration: 1000,
+    close: false,
+    style: {
+      background: "red",
+      color: "white",
+      textAlign: "center",
+    },
+  });
+}
+
+function alertSuccess(message) {
+  Toastify.toast({
+    text: message,
+    duration: 1000,
+    close: false,
+    style: {
+      background: "green",
+      color: "white",
+      textAlign: "center",
+    },
+  });
 }
 
 // whenever img changes within the DOM, call loadImage
