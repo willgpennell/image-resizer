@@ -76,5 +76,27 @@ function alertSuccess(message) {
   });
 }
 
+// send image data to main
+function sendImage(e) {
+  e.preventDefault();
+
+  const width = widthInput.value;
+  const height = heightInput.value;
+  const imgPath = img.files[0].path;
+
+  if (!img.files[0]) {
+    alertError("Please upload an image");
+    return;
+  }
+
+  if (width === "" || height === "") {
+    alertError("Please fill in a height and width");
+    return;
+  }
+
+  // send to main using ipc TODO
+}
+
 // whenever img changes within the DOM, call loadImage
 img.addEventListener("change", loadImage);
+form.addEventListener("submit", sendImage);
