@@ -94,7 +94,17 @@ function sendImage(e) {
     return;
   }
 
-  // send to main using ipc TODO
+  // send to main using ipc, options are a JSON with imgPath, width and height
+  ipcRenderer.send("image:resize", {
+    imgPath,
+    width,
+    height,
+  });
+
+  // catch success msg from main
+  ipcRenderer.on("image:done", () => {
+    alertSuccess("Image Resized!!");
+  });
 }
 
 // whenever img changes within the DOM, call loadImage
