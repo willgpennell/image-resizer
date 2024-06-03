@@ -7,8 +7,10 @@ const fs = require("fs");
 const resizeImg = require("resize-img");
 const { app, BrowserWindow, Menu, ipcMain, shell } = require("electron");
 
+process.env.NODE_ENV = "production";
+
 // check if application is being run in development mode
-const isDev = process.env.NODE_ENV !== "development";
+const isDev = process.env.NODE_ENV !== "production";
 
 // checks if current platform is mac
 const isMac = process.platform === "darwin";
